@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Computational morphology and syntax</title>
+
+		<meta name="author" content="D. Purge">
+		<meta name="description" content="Review material for computational morphology and syntax">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reset.min.css" integrity="sha512-Mjxkx+r7O/OLQeKeIBCQ2yspG1P5muhAtv/J+p2/aPnSenciZWm5Wlnt+NOUNA4SHbnBIE/R2ic0ZBiCXdQNUg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.css" integrity="sha512-0AUO8B5ll9y1ERV/55xq3HeccBGnvAJQsVGitNac/iQCLyDTGLUBMPqlupIWp/rJg0hV3WWHusXchEIdqFAv1Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/theme/black.min.css" integrity="sha512-B1sAcZ4KSpvbIUUvxaoqy56z88d6fozQyEV54K0gVBUMDMcVu9CAXMwJ5wTWo650j3IQH6yDEETiek6lrk/zCw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/plugin/highlight/monokai.min.css" integrity="sha512-z8wQkuDRFwCBfoj7KOiu1MECaRVoXx6rZQWL21x0BsVVH7JkqCp1Otf39qve6CrCycOOL5o9vgfII5Smds23rg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	</head>
+
+	<body>
+
+		<div class="reveal">
+            <div class="slides">
+                <section>
+                    <h1>Computational morphology and syntax</h1>
+                </section>
+
+                <section>
+                    <p>A language in the <em>finite-state automata</em> (FSA) application is a set of expressions,
+                    each of which is built from a set of symbols from an alphabet,
+                    where an <em>alphabet</em> is itself a set.</p>
+
+                    <p>Typical alphabets in speech and language processing are sets of letters, phones or words.</p>
+                </section>
+                
+                <section>
+                    <p><em>Regular languages</em> are languages that can be constructed out of a finite alphabet
+                    <code>Σ</code> using one or more of the following operations:</p>
+
+                    <ul>
+                        <li>set union</li>
+                        <li>concatenation</li>
+                        <li>transitive closure (Kleene star)</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <p>Regular languages can be used to describe a large number of phenomena in natural language
+                    including many morphological operations and a large set of syntactic structures.</p>
+                    <p>But there are linguistic constructions that cannot be described using regular languages.</p>
+                    <p>Eg. unbounded copying cannot be described in terms of regular languages or even context-free languages.</p>
+                </section>
+                
+                <section>
+                    <p><em>Regular languages</em> are commonly denoted via regular expressions.</p>
+                </section>
+
+                <section>
+                    <section>
+                        <p>A <em>finite-state automaton</em> is a quintuple</p>
+                        <code>M = (Q, s, F, Σ, δ)</code>
+                        <p>where:</p>
+
+                        <ul>
+                            <li><code>Q</code> is a finite set of states</li>
+                            <li><code>s</code> is a designated initial state</li>
+                            <li><code>F</code> is a designated set of final states</li>
+                            <li><code>Σ</code> is an alphabet of symbols</li>
+                            <li><code>δ</code> is a transition relation from <code>Q × (Σ ∪ ε)</code> to <code>Q</code>,
+                                where <code>A × B</code> denotes the cross-product of sets <code>A</code> and <code>B</code></li>
+                        </ul>
+                    </section>
+                    
+                    <section>
+                        <p>The <em>cross-product of two sets</em> creates a set of pairs,
+                        with each member of the first set paired with each member of the second set.</p>
+
+                        <p>For example:</p>
+                        <code>{a, b} × {c, d} = {(a, c),(a, d),(b, c),(b, d)}</code>
+                    </section>
+
+                    <section>
+                        <p>The transition relation <code>δ</code> is from state/symbol pairs to states.</p>
+                    </section>
+                </section>
+
+                <section>
+                    <p><em>Kleene’s theorem</em> states that:</p>
+                    <ul>
+                        <li>every regular language can be recognized by a finite-state automaton;</li>
+                        <li>every finite-state automaton recognizes a regular language.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <p>A (2-way) <em>finite-state transducer</em> is a quintuple 
+                        <br/>
+                        <code>M = (Q, s, F, Σ × Σ, δ)</code>
+                        <br/>
+                        where:</p>
+                    <ul>
+                        <li><code>Q</code> is a finite set of states</li>
+                        <li><code>s</code> is a designated initial state</li>
+                        <li><code>F</code> is a designated set of final states</li>
+                        <li><code>Σ</code> is an alphabet of symbols</li>
+                        <li><code>δ</code> is a transition relation from <code>Q × (Σ ∪ ε × Σ ∪ ε)</code> to <code>Q</code></li>
+                    </ul>
+                </section>
+
+                <section>
+                    <p><em>Regular languages</em> are closed under the following operations:</p>
+                    <ul>
+                        <li>concatenation</li>
+                        <li>Kleene closure</li>
+                        <li>union</li>
+                        <li>intersection</li>
+                        <li>difference</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <p><em>Regular relations</em> are closed under the following operations:</p>
+                    <ul>
+                        <li>concatenation</li>
+                        <li>Kleene closure</li>
+                        <li>union</li>
+                        <li>composition</li>
+                        <li>inversion</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <p><em>Regular relations</em> are not closed under:</p>
+                    <ul>
+                        <li>intersection</li>
+                        <li>difference</li>
+                    </ul>
+                </section>
+            </div>
+        </div>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.js" integrity="sha512-35L3EFHQcGaTZ6QN9wAg9iK1hTPVCn8RGsscuXjm5JdmDRyOw+/IWJ4wavGkozQ8VDoddD7nV1psHgu/BYNpxQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/plugin/markdown/markdown.min.js" integrity="sha512-4exkEeyVuaWUFKozXl6L3UCugl6ai1cKnrVFkWUstdrNB2sDxxmPEaHBzTlYm9wX78EjPzEBG0s8k37oPeUFIw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/plugin/highlight/highlight.min.js" integrity="sha512-xkVKkN0o7xECTHSUZ9zdsBYRXiAKH7CZ3aICpW6aQJZsufVVRLhEBTDjTpC1tPzm+gNZiOeW174zXAB2fOLsTg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/plugin/math/math.min.js" integrity="sha512-r8CLLeBm1OZX6ll1USdj99rqbY3Y9no8A1YUMy0l/kk+KFnlsQT5E/8gEs59Q7BRta0jBOZVwLqvmlWtdBzrXw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/plugin/math/katex.min.js" integrity="sha512-OvY0Rdcp6TwXhJROqoMdOTjt0MrF5lnpxEsT0UHgawPoMPlQD5OCsd2f8X8Lfht63RvfrWqmJfmXikC+jjEejA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<script>
+
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				center: true,
+				hash: true,
+
+				plugins: [ RevealMarkdown, RevealHighlight, RevealMath.KaTeX ]
+			});
+
+		</script>
+
+	</body>
+</html>
